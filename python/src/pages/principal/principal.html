@@ -1,0 +1,56 @@
+<!--
+  Generated template for the MapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>  
+    <ion-card-header class="headerCard">
+    
+  </ion-card-header>
+    </ion-header>
+  
+  
+  <ion-content class="contenido"> 
+
+
+     <form [formGroup]="formTarjetaId" class="formulario" (ngSubmit)="enviar()" novalidate>
+       <ion-img id="imagen"src="https://i.ytimg.com/vi/kOMLOI6A3AU/maxresdefault.jpg"></ion-img>
+    <ion-grid>
+    
+      <ion-col col-12>
+        <ion-item>
+      <ion-label color="primary" >ID</ion-label>
+      <ion-input type="text" formControlName="id" readonly></ion-input>
+    </ion-item>
+    </ion-col>
+    </ion-grid> 
+<ion-grid>
+  <ion-row>
+    
+    <ion-col col-4>
+      <ion-item>
+    
+      <ion-input type="text"  formControlName="evento" readonly></ion-input>
+    
+      </ion-item> 
+    </ion-col>
+    <ion-col col-8>
+      <ion-item>
+      <ion-label color="primary" >Plazas Disponibles</ion-label>
+      <ion-input type="text" formControlName="totalAutos" readonly></ion-input>
+    
+      </ion-item> 
+    </ion-col>
+  </ion-row>
+  
+
+</ion-grid>
+
+   
+  
+</form>
+
+      
+  </ion-content>
