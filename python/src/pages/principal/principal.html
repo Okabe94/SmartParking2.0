@@ -6,51 +6,61 @@
 -->
 
 <ion-header>  
-    <ion-card-header class="headerCard">
-    
-  </ion-card-header>
-    </ion-header>
-  
-  
-  <ion-content class="contenido"> 
+  <ion-navbar color="blueParking">   
+
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
 
 
-     <form [formGroup]="formTarjetaId" class="formulario" (ngSubmit)="enviar()" novalidate>
-       <ion-img id="imagen"src="https://i.ytimg.com/vi/kOMLOI6A3AU/maxresdefault.jpg"></ion-img>
-    <ion-grid>
-    
-      <ion-col col-12>
-        <ion-item>
-      <ion-label color="primary" >ID</ion-label>
-      <ion-input type="text" formControlName="id" readonly></ion-input>
-    </ion-item>
-    </ion-col>
-    </ion-grid> 
-<ion-grid>
-  <ion-row>
-    
-    <ion-col col-4>
+<ion-content class="contenido"> 
+
+
+ <form [formGroup]="formTarjetaId" class="formulario" (ngSubmit)="enviar()" novalidate>
+  <ion-card>
+
+    <ion-card-header>
+      <img class="imagen" [src]="imgFondo">
+    </ion-card-header>
+
+    <ion-card-content>
       <ion-item>
-    
-      <ion-input type="text"  formControlName="evento" readonly></ion-input>
-    
-      </ion-item> 
-    </ion-col>
-    <ion-col col-8>
+        <ion-label floating color="primary" >ID</ion-label>
+        <ion-input type="text" formControlName="id" readonly></ion-input>
+      </ion-item>
+
       <ion-item>
-      <ion-label color="primary" >Plazas Disponibles</ion-label>
-      <ion-input type="text" formControlName="totalAutos" readonly></ion-input>
-    
-      </ion-item> 
-    </ion-col>
-  </ion-row>
+        <ion-label floating color="primary" >Evento</ion-label>
+        <ion-input type="text"  formControlName="evento" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating color="primary" >Plazas Disponibles</ion-label>
+        <ion-input type="text" formControlName="totalAutos" readonly></ion-input>
+      </ion-item>
+    </ion-card-content>
+
+
+  </ion-card>
+
+
   
 
-</ion-grid>
 
-   
   
 </form>
 
-      
-  </ion-content>
+<ion-fab bottom  left #fab >
+  <button ion-fab color="blueParking"><ion-icon name="apps"></ion-icon></button>
+  <ion-fab-list side="top" >      
+    <button ion-fab color="blueParking"><ion-icon name="logo-vimeo"></ion-icon></button>
+    <button ion-fab color="blueParking"><ion-icon name="logo-googleplus"></ion-icon></button>
+  </ion-fab-list>
+  <ion-fab-list side="right">
+    <button ion-fab color="blueParking"><ion-icon name="logo-facebook"></ion-icon></button>
+    <button ion-fab color="blueParking"><ion-icon name="logo-twitter"></ion-icon></button>    
+  </ion-fab-list>
+</ion-fab>
+</ion-content>

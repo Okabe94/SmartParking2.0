@@ -14,6 +14,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FIREBASE_CONFIG } from "./app.firebase";
 
 import { AngularFireAuthModule } from "angularfire2/auth"
+import { FireStorageProvider } from '../providers/fire-storage/fire-storage';
+import { AlertProvider } from '../providers/alert/alert';
 
 
 
@@ -57,6 +59,8 @@ import { AngularFireAuthModule } from "angularfire2/auth"
     AngularFireDatabaseModule,
 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FireStorageProvider,
+    AlertProvider,
     
   ]
 })

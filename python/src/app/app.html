@@ -1,4 +1,46 @@
-<ion-nav [root]="rootPage">
+<ion-menu [content]="content" enable persistent="true" side="right" type="overlay">
+  <ion-header>
+    <ion-toolbar color="blueParking">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="contentMenu" padding>
+    <img class="imagenLogo" [src]="imgLogo">
+
+    
+    <ion-list inset >
+      <h2>Nombre del Usuario</h2>
+      <ion-list-header transparent ><h2>Mis Cosas</h2></ion-list-header>
+      <button menuClose ion-item class="item_trns" item-right icon-left tappable>
+        <ion-icon name="bookmarks" color="blueParking"></ion-icon> 
+        Mis Clases
+      </button>
+      <button menuClose ion-item class="item_trns" item-right icon-left tappable>
+        <ion-icon name="logo-buffer" color="blueParking"></ion-icon> 
+        Mis Multas
+      </button>  
+      <button menuClose ion-item class="item_trns" item-right icon-left tappable>
+        <ion-icon name="md-calendar" color="blueParking"></ion-icon> 
+        Pico y Placa
+      </button>  
+      <button menuClose ion-item class="item_trns" item-right icon-left tappable>
+        <ion-icon name="car" color="blueParking"></ion-icon> 
+        Reservar
+      </button>  
+      
+      <ion-list-header transparent ><h2>Usuario</h2></ion-list-header>
+      <button menuClose ion-item class="item_trns" item-right icon-left tappable>
+        <ion-icon name="log-out" color="blueParking"></ion-icon> 
+        Salir
+      </button>
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false">
 	
 	
 </ion-nav>

@@ -14,3 +14,20 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.item_trns{
+	border-color: rgba(0,0,0,0);
+	background-color: rgba(0,0,0,0);
+	color:black;
+}
+.contentMenu{
+  /*background: radial-gradient(rgb(235,224,220) 0%,orange 200%);  */
+}
+
+.imagenLogo{
+ margin-left: 25%;
+ margin-top: 5%;
+
+ width: 50%;
+
+}

@@ -10,6 +10,9 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularFire2/d
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
+import { FireStorageProvider } from '../../providers/fire-storage/fire-storage';
+
+import { AlertProvider } from '../../providers/alert/alert';
 
 @Component({
   selector: 'page-principal',
@@ -25,44 +28,69 @@ export class PrincipalPage {
   public totalCarros:any; 
 
   public bandera:boolean = false;
+
+  firestore = firebase.storage();
+
+  firequery = firebase.database().ref('query-data');
+  public imgFondo;
+  
+  public queryPaqueadero:any;
   constructor(
     private navController: NavController,
     private afAuth: AngularFireAuth,
     private toasCtrl: ToastController,
     public afd: AngularFireDatabase,
     private formBuilder: FormBuilder,
+    public fsp:FireStorageProvider,
+    public alertProvider:AlertProvider
     ) {
+
+  }
+
+  ngOnInit(){
     this.creareForm();
+    this.firebaseUser = this.afd.list('/Parqueadero');    
     
-    
-    //this.formTarjetaId.controls.totalAutos.setValue(this.totalCarros);
+    // this.queryPaqueadero = this.firequery.ref.child('User/');
 
-    //Evento de Cambio de Tarjeta
-    //this.firebaseUser = this.afd.list('/EventoTarjeta');
-    this.firebaseUser = this.afd.list('/Parqueadero');
+    // this.queryPaqueadero.orderByChild("id").equalTo('E9 D3 E7 AB').on('value' , 
+    //   function(data){
+    //     console.log(data.val())
+    //   })
+
     this.firebaseUser.subscribe(lista => {      
-    this.datos=lista;
-
-    // //verificacion Primera Vez (No es necesario que ahi este el id la primera vez)
-    // if(this.bandera == false){
-    // this.formTarjetaId.controls.id.setValue("");   
-    // this.bandera = true;
-    // }else{      
-    this.formTarjetaId.controls.evento.setValue(this.datos[0]['$value']);  
-    this.formTarjetaId.controls.id.setValue(this.datos[1]['$value']);  
-    this.totalCarros=this.datos[2]['$value'];
-    this.formTarjetaId.controls.totalAutos.setValue(this.totalCarros);  
-
-    
-    // }
-
+      this.datos=lista;    
+      var evento = this.datos[1]['$value'];
+      if(evento != undefined){
+        if(evento == "Salio"){
+          this.alertProvider.viewMessageToastController("Que tenga un buen dia")
+        }
+        if(evento == "Entro"){
+          this.alertProvider.viewMessageToastController("Bienvenido")
+        }
+      }
+      this.formTarjetaId.controls.evento.setValue(evento);  
+      this.formTarjetaId.controls.id.setValue(this.datos[2]['$value']);  
+      this.totalCarros=this.datos[3]['$value'];
+      this.formTarjetaId.controls.totalAutos.setValue(this.totalCarros);  
     })
-    
+    this.fsp.getUrlStorage("LogoSmartParking.png",this.getUrlStorageImage.bind(this));
+  }
 
-    }
+  getUrlStorageImage(image){
+    this.imgFondo = image;
+
+  }
+
+  getUrlStorage(urlFile,callback){
+    return this.firestore.ref().child(urlFile).getDownloadURL().then((file) => { 
+      callback(file);
+    })
+  } 
 
 
- creareForm() {
+
+  creareForm() {
 
     this.formTarjetaId = this.formBuilder.group({
       id: ['', Validators.required],
@@ -73,34 +101,8 @@ export class PrincipalPage {
     
   }
 
-  enviar(){
-    var codigo = this.formTarjetaId.value.id;
+  
 
-    if(codigo == "E0 2F 9B 1B" && this.totalCarros > 0){
-    this.totalCarros = this.totalCarros - 1;
-    this.formTarjetaId.controls.totalAutos.setValue(this.totalCarros);   
-    this.formTarjetaId.controls.evento.setValue("Entro");    
-    }else{
-      if(this.totalCarros <= 0){
-        this.toasCtrl.create({
-        message: "El numero de carros ya estan en ceros Imposible una salida de alguien mas", duration: 3000
-      }).present();
-      }
-    }
-    if(codigo == "E9 D3 E7 AB" && this.totalCarros < 100){
-    this.totalCarros = this.totalCarros + 1;     
-    this.formTarjetaId.controls.totalAutos.setValue(this.totalCarros);   
-    this.formTarjetaId.controls.evento.setValue("Salio");
-
-    }else{
-      if(this.totalCarros >= 100){
-          this.toasCtrl.create({
-        message: "Numero maximo de carros en el paqueadero", duration: 3000
-      }).present();
-      }
-
-    }
-    
-  }
+  
 
 }
